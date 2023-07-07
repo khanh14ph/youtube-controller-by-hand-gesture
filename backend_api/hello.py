@@ -18,7 +18,6 @@ def stringToRGB(base64_string):
     return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
 
 
-count = [0]
 current_folder = os.path.dirname(os.path.realpath(__file__))
 @app.post("/movie_controller")
 async def detect(request: Request):
@@ -29,12 +28,7 @@ async def detect(request: Request):
     if os.path.exists(img_path):
         os.remove(img_path)
     cv2.imwrite(img_path, image_np)
-    i = 101
-    count[0] += 1
-    if (count[0] % 10 == 0):
-        i = 5
-    # count[0] = 100
-    # print(f"SEND DATA {'mute'}")
+
     return {"content": f"100"}
 
 if __name__ == "__main__":
