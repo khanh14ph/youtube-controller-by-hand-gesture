@@ -98,27 +98,25 @@ function handleSubmit(imageSrc) {
         crossDomain: true
     }).then(res => res.json()).then(result => {
         var str = result['content'];
-        if (str == "0") {
+        if (str == "stop") {
             playStopVid();
-        } else if (str == "1") {
+        } else if (str == "ok") {
             // next
             next();
-        } else if (str == "2") {
+        } else if (str == "mute") {
             mute()
-        } else if (str == "3") {
+        } else if (str == "like") {
             volumeUpVid();
-        } else if (str == "4") {
+        } else if (str == "dislike") {
             volumeDownVid();
-        } else if (str == "5") {
+        } else if (str == "palm") {
             // resize
             sizeScreen();
-        } else if (str == "6") {
+        } else if (str == "two_up") {
             speedUp();
-        } else if (str == "7") {
+        } else if (str == "peace") {
             speedDown();
-        } else if (str == "100") {
-            fullScreen();
-        }
+        } 
     })
 }
 
@@ -140,7 +138,7 @@ function volumeUpVid() {
 
 function mute() {
     chrome.tabs.executeScript({
-        code: youtube + '.volume = 0',
+        code: `document.getElementsByClassName("ytp-mute-button ytp-button")[0].click()`
     });
 }
 
