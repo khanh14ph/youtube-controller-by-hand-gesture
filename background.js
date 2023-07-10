@@ -8,10 +8,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason.search(/install/g) === -1) {
         return;
     }
-    chrome.tabs.create({
-        url: chrome.extension.getURL('welcome.html'),
-        active: true
-    });
 });
 
 function vidOff() {
@@ -19,6 +15,7 @@ function vidOff() {
     vid.src = "";
     if (vid.srcObject) vid.srcObject.getTracks()[0].stop();
 }
+
 let infer = false;
 // Get previously-stored infer checkbox setting, if any.
 chrome.storage.local.get('infer', items => {
@@ -41,11 +38,14 @@ async function setupCam() {
 
 // If cam acecss gets granted to this extension, setup webcam.
 chrome.storage.onChanged.addListener((changes, namespace) => {
-
     if ('infer' in changes) {
         var infer_state = changes['infer'].newValue;
         if (infer_state) {
             // If cam acecss has already been granted to this extension, setup webcam.
+            chrome.storage.local.set({
+                'camAccess': true
+            }, () => {});
+
             chrome.storage.local.get('camAccess', items => {
                 if (!!items['camAccess']) {
                     console.log('cam access already exists');
@@ -68,10 +68,14 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
             if (intervalId) {
                 clearInterval(intervalId);
             }
+            chrome.storage.local.set({
+                'camAccess': false
+            }, () => {});
             console.log('OFF');
         }
 
     }
+
 });
 const canvas = document.createElement("canvas");
 
