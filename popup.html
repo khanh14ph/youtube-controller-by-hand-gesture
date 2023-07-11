@@ -20,13 +20,20 @@ limitations under the License.
         body {
             width: 250px;
         }
+        #webcamVideo {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <div>
-        <video autoplay="true" id="webcamVideo" width="227" height="227"></video>
+    <div class="area">
+        <div>
+            <video autoplay="true" id="webcamVideo" width="227" height="227"></video>
+            <canvas id="videoCanvas" width="227" height="227"></canvas>
+        </div>
     </div>
+
     <div id="traintext"></div>
     <button type="button" id="capture">Capture</button>
     <div>
@@ -35,6 +42,7 @@ limitations under the License.
     </div>
     <div id="capturedimage"></div>
     <script src="popup.js"></script>
+
 </body>
 
 </html>

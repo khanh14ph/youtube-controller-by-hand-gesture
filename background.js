@@ -1,6 +1,6 @@
 const vid = document.querySelector('#webcamVideo');
 
-const image = document.querySelector("#capturedimage");
+// const image = document.querySelector("#capturedimage");
 
 var intervalId = null;
 // Do first-time setup to gain access to webcam, if necessary.
@@ -85,7 +85,7 @@ var getImage = function() {
     canvas.getContext('2d').drawImage(vid, 0, 0);
     var img = document.createElement("img");
     img.src = canvas.toDataURL();
-    image.innerHTML = '<img src="' + img.src + '"/>';
+    // image.innerHTML = '<img src="' + img.src + '"/>';
     return img.src
 };
 
@@ -102,6 +102,7 @@ function handleSubmit(imageSrc) {
         crossDomain: true
     }).then(res => res.json()).then(result => {
         var str = result['content'];
+        document.getElementById('capturedimage').innerHTML = str;
         if (str == "stop") {
             playStopVid();
         } else if (str == "ok") {
