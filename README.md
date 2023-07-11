@@ -15,5 +15,6 @@ python api.py --detector_path path/to/detector/checkpoint --classifier_path path
 3. Open a random youtube video and click the extension icon -> Movie Controller  
 ![image](https://github.com/huydsai02/cv/assets/84078549/05237a69-6fc6-40ae-8e24-4264fee65ad0)
 4. Tick to checkbox and enjoy your video  
-![image](https://github.com/huydsai02/cv/assets/84078549/359abf13-c8b3-4821-ace8-51649245e256)
+![image](https://github.com/huydsai02/cv/assets/84078549/8e4e8de4-f7c3-4b6a-8b78-f74a2047f97c)
+
 
