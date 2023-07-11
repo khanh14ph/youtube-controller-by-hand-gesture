@@ -80,9 +80,10 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 const canvas = document.createElement("canvas");
 
 var getImage = function() {
-    canvas.setAttribute('width', '640'); // clears the canvas
-    canvas.setAttribute('height', '480'); // clears the canvas
-    canvas.getContext('2d').drawImage(vid, 0, 0);
+    let width = 227, height = 170.25;
+    canvas.setAttribute('width', `${width}`); // clears the canvas
+    canvas.setAttribute('height', `${height}`); // clears the canvas
+    canvas.getContext('2d').drawImage(vid, 0, 0, width, height);
     var img = document.createElement("img");
     img.src = canvas.toDataURL();
     // image.innerHTML = '<img src="' + img.src + '"/>';
@@ -200,4 +201,4 @@ function sendMessage() {
     chrome.runtime.sendMessage({data: label});
 }
 
-setInterval(sendMessage, 500);
+setInterval(sendMessage, 100);

@@ -64,7 +64,7 @@ chrome.storage.local.get('infer', items => {
 
 const canvasTemp = document.createElement("canvas");
 
-function drawImge(){
+function drawImage(){
 
     let width = 227, height = 170.25;
     // document.getElementById("ratio").innerHTML = vid.videoWidth > 0 ? vid.videoHeight / vid.videoWidth : 0;
@@ -111,7 +111,7 @@ function drawImge(){
     })
 }
 
-setInterval(drawImge, 100);
+setInterval(drawImage, 100);
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     document.getElementById("label_model").innerHTML = request.data;
