@@ -22,10 +22,8 @@ function turnOffInferring() {
 
 function inferButtonClicked() {
     if (document.getElementById('infer').checked) {
-        document.getElementById('capture').innerHTML = document.getElementById('infer').checked;
         turnOnInferring()
     } else {
-        document.getElementById('capture').innerHTML = document.getElementById('infer').checked;
         turnOffInferring()
     }
 

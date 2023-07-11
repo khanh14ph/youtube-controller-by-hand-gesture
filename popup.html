@@ -19,26 +19,29 @@ limitations under the License.
     <style>
         body {
             width: 250px;
-        }
-        #webcamVideo {
-            display: none;
+            height: fit-content;
         }
         #label_model {
             text-align: center;
+        }
+        .area {
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+        }
+        .container {
+            padding: 0 10px 10px 10px;
         }
     </style>
 </head>
 
 <body>
     <div class="area">
-        <video autoplay="true" id="webcamVideo" width="227" height="227"></video>
-        <canvas id="videoCanvas" width="227" height="227"></canvas>
+        <video autoplay="true" id="webcamVideo" style="display: none;"></video>
+        <canvas id="videoCanvas"></canvas>
     </div>
     <p id="label_model"></p>
-    <p id="ratio"></p>
-    <div id="traintext"></div>
-    <button type="button" id="capture">Capture</button>
-    <div>
+    <div class="container">
         <input type="checkbox" id="infer">
         <label for="infer">Enable control by gesture</label>
     </div>
