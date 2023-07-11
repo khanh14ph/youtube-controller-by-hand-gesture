@@ -1,0 +1,40 @@
+dataset:
+  annotations: /home/vuhl/hagrid/hagrid-sample-500k-384p/ann_train_val
+  dataset: /home/vuhl/hagrid/hagrid-sample-500k-384p/hagrid_500k
+  targets:
+    - dislike
+    - like
+    - mute
+    - ok
+    - palm
+    - peace
+    - stop
+    - two_up
+    - no_gesture
+  image_size: [224, 224]
+  subset: -1
+random_state: 42
+device: 'cpu'
+experiment_name: ResNet18
+model:
+  name: 'ResNet18'  # 'MobileNetV3_large' or 'MobileNetV3_small' or 'ResNet18'
+  pretrained: False
+  freezed: False
+  start_epoch: 15
+  checkpoint: /home/vuhl/hagrid/experiments/ResNet18/best_model.pth
+  full_frame: False
+optimizer:
+  lr: 0.005
+  momentum: 0.9
+  weight_decay: 0.0005
+scheduler:
+  start_factor: 0.001
+train_params:
+  epochs: 30
+  num_workers: 8
+  train_batch_size: 24
+  test_batch_size: 24
+  prefetch_factor: 24
+metric_params:
+  metrics: ['accuracy', 'f1_score', 'precision', 'recall']
+  average: 'weighted'

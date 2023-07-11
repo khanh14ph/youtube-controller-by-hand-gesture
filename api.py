@@ -26,6 +26,13 @@ from detector.model import TorchVisionModel
 from detector.ssd_mobilenetv3 import SSDMobilenet
 from classifier import utils
 
+current_folder = os.path.dirname(os.path.realpath(__file__))
+
+parser = argparse.ArgumentParser(description='Model Live')
+parser.add_argument("--detector_path", default="", type=str)
+parser.add_argument("--classifier_path", default="", type=str)
+args = parser.parse_args()
+
 def preprocess_from_array(img: np.ndarray) -> Tuple[Tensor, Tuple[int, int], Tuple[int, int]]:
         """
         Preproc image for model input
@@ -71,11 +78,11 @@ def preprocess(path):
         return img_tensor, (width, height), (padded_width, padded_height)
 
 
-conf_classifier = OmegaConf.load("/home/huynv/cv/classifier/config/default.yaml")
+conf_classifier = OmegaConf.load(os.path.join(current_folder, "config", "default.yaml"))
 classifier_model=utils.build_model(
         model_name=conf_classifier.model.name,
         num_classes=len(targets),
-        checkpoint=conf_classifier.model.get("checkpoint", None),
+        checkpoint=args.classifier_path,
         device=conf_classifier.device,
         pretrained=conf_classifier.model.pretrained,
         freezed=conf_classifier.model.freezed,
@@ -113,11 +120,11 @@ gestures = [
 ]
 
 detector = SSDMobilenet(num_classes=20)
-detector.load_state_dict("/home/vuhl/cv/cv/Computer-Vision/SSDLite.pth", map_location=conf_classifier.device)
+detector.load_state_dict(args.detector_path, map_location=conf_classifier.device)
 detector.eval()
 
-img_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img", "receive.png")
-full_img_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img", "receive_full.png")
+img_folder = os.path.join(current_folder, "img")
+img_path = os.path.join(img_folder, "receive.png")
 
 @app.post("/detector")
 async def get_bounding_box(request: Request):
@@ -126,7 +133,6 @@ async def get_bounding_box(request: Request):
     json_file: bytes = await request.json()
     imageSrc = json_file['imageSrc']
     image_np = stringToRGB(imageSrc)
-    # cv2.imwrite(full_img_path, image_np)
 
     processed_frame, size, padded_size = preprocess_from_array(image_np)
 
@@ -164,7 +170,6 @@ async def detect(request: Request):
     json_file: bytes = await request.json()
     imageSrc = json_file['imageSrc']
     image_np = stringToRGB(imageSrc)
-    # cv2.imwrite(full_img_path, image_np)
 
     NUM_HANDS = 100
     processed_frame, size, padded_size = preprocess_from_array(image_np)
