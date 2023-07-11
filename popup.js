@@ -1,4 +1,5 @@
 const vid = document.querySelector('#webcamVideo');
+let intervalId = null;
 
 var localstream;
 let pX, pY, boundingWidth, boundingHeight;
@@ -18,6 +19,9 @@ function turnOffInferring() {
         infer: false
     });
     vidOff();
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
 }
 
 function inferButtonClicked() {
@@ -26,11 +30,10 @@ function inferButtonClicked() {
     } else {
         turnOffInferring()
     }
-
 }
 
 function turnOnInferring() {
-
+    setupCam();
     // document.getElementById('infer').checked = true;
     chrome.storage.local.set({
         'infer': true
@@ -38,8 +41,11 @@ function turnOnInferring() {
     chrome.extension.sendRequest({
         infer: true
     });
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    intervalId = setInterval(drawImage, 100);
 }
-setupCam();
 
 function setupCam() {
     navigator.mediaDevices.getUserMedia({
@@ -106,10 +112,13 @@ function drawImage(){
         ctx.lineWidth = "3";
         ctx.strokeStyle = "green";    
         ctx.stroke();
+
+        if (!document.getElementById('infer').checked) {
+            canvas.setAttribute('width', `${width}`); // clears the canvas
+            canvas.setAttribute('height', `${height}`); // clears the canvas
+        }
     })
 }
-
-setInterval(drawImage, 100);
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     document.getElementById("label_model").innerHTML = request.data;

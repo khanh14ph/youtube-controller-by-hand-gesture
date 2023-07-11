@@ -71,6 +71,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
             chrome.storage.local.set({
                 'camAccess': false
             }, () => {});
+            label = "no_gesture"
             console.log('OFF');
         }
 
