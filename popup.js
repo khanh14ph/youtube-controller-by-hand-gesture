@@ -93,15 +93,10 @@ function drawImge(){
     
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        // var str = result['content'];
         let rx = parseFloat(result['rx'])
         let ry = parseFloat(result['ry'])
         let rw = parseFloat(result['rw'])
         let rh = parseFloat(result['rh'])
-        // document.getElementById("rx").innerHTML = rx;
-        // document.getElementById("ry").innerHTML = ry;
-        // document.getElementById("rw").innerHTML = rw;
-        // document.getElementById("rh").innerHTML = rh;
         
         pX = width * rx;
         pY = height * ry;
@@ -113,29 +108,12 @@ function drawImge(){
         ctx.strokeStyle = "red";    
         ctx.stroke();
     })
-
-
-    // var faceArea = 50;
-    // var pX=canvas.width/2 - faceArea/2;
-    // var pY=canvas.height/2 - faceArea/2;
-    // let pX = width * rx;
-    // let pY = height * ry;
-    // let boundingWidth = width * rw;
-    // let boundingHeight = height * rh;
-
-    // ctx.rect(pX,pY,boundingWidth,boundingHeight);
-    // ctx.lineWidth = "6";
-    // ctx.strokeStyle = "red";    
-    // ctx.stroke();
-
-
-    // setTimeout(drawImge , 100);
 }
 
-// var video = document.querySelector("#webcamVideo");
-// video.onplay = function() {
-//     setTimeout(drawImge , 300);
-// };
-setInterval(drawImge, 100);
+setInterval(drawImge, 1000);
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    document.getElementById("label_model").innerHTML = request.data;
+  });
 
 document.getElementById('infer').onclick = inferButtonClicked;

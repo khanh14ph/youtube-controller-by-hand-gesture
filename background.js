@@ -1,5 +1,5 @@
 const vid = document.querySelector('#webcamVideo');
-
+let label = "no_gesture"
 // const image = document.querySelector("#capturedimage");
 
 var intervalId = null;
@@ -102,7 +102,7 @@ function handleSubmit(imageSrc) {
         crossDomain: true
     }).then(res => res.json()).then(result => {
         var str = result['content'];
-        document.getElementById('capturedimage').innerHTML = str;
+        label = str;
         if (str == "stop") {
             playStopVid();
         } else if (str == "ok") {
@@ -195,3 +195,9 @@ function sizeScreen() {
         code: `document.getElementsByClassName("ytp-size-button ytp-button")[0].click()`
     });
 }
+
+function sendMessage() {
+    chrome.runtime.sendMessage({data: label});
+}
+
+setInterval(sendMessage, 500);
