@@ -31,19 +31,17 @@ limitations under the License.
 
 <body>
     <div class="area">
-        <div>
-            <video autoplay="true" id="webcamVideo" width="227" height="227"></video>
-            <canvas id="videoCanvas" width="227" height="227"></canvas>
-        </div>
+        <video autoplay="true" id="webcamVideo" width="227" height="227"></video>
+        <canvas id="videoCanvas" width="227" height="227"></canvas>
     </div>
     <p id="label_model"></p>
+    <p id="ratio"></p>
     <div id="traintext"></div>
     <button type="button" id="capture">Capture</button>
     <div>
         <input type="checkbox" id="infer">
         <label for="infer">Enable control by gesture</label>
     </div>
-    <div id="capturedimage"></div>
     <script src="popup.js"></script>
 
 </body>

@@ -1,4 +1,5 @@
 const vid = document.querySelector('#webcamVideo');
+
 var localstream;
 let pX, pY, boundingWidth, boundingHeight;
 
@@ -64,9 +65,9 @@ chrome.storage.local.get('infer', items => {
 const canvasTemp = document.createElement("canvas");
 
 function drawImge(){
-    var video = document.querySelector("#webcamVideo");
 
-    let width = 227, height = 227 / video.videoWidth * video.videoHeight;
+    let width = 227, height = 170.25;
+    // document.getElementById("ratio").innerHTML = vid.videoWidth > 0 ? vid.videoHeight / vid.videoWidth : 0;
 
     canvasTemp.setAttribute('width', `${width}`); // clears the canvas
     canvasTemp.setAttribute('height', `${height}`); // clears the canvas
@@ -91,7 +92,7 @@ function drawImge(){
     
         var ctx = canvas.getContext('2d');
     
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
         let rx = parseFloat(result['rx'])
         let ry = parseFloat(result['ry'])
@@ -104,13 +105,13 @@ function drawImge(){
         boundingHeight = height * rh;
     
         ctx.rect(pX,pY,boundingWidth,boundingHeight);
-        ctx.lineWidth = "6";
-        ctx.strokeStyle = "red";    
+        ctx.lineWidth = "3";
+        ctx.strokeStyle = "green";    
         ctx.stroke();
     })
 }
 
-setInterval(drawImge, 1000);
+setInterval(drawImge, 100);
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     document.getElementById("label_model").innerHTML = request.data;
