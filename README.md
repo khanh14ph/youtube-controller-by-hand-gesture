@@ -23,5 +23,16 @@ python api.py --detector_path path/to/detector/checkpoint --classifier_path path
    python -m classifier.run --command 'train' --path_to_config classifier/config/*.yaml
    ```
 ## Training MAE VIT
-1. run
-
+1. If you want to run ViT without MAE pretrain, just run
+   ```
+   python VIT_classifier.py
+   ```
+2. If you want to run ViT with MAE pretrain, 
+   First, run:
+   ```
+   python MAE.py
+   ```
+   After finishing training, load the MAE checkpoint in the VIT_classifier.py file, and run:
+   ```
+   python VIT_classifier.py
+   ```
