@@ -18,7 +18,10 @@ python api.py --detector_path path/to/detector/checkpoint --classifier_path path
 ![image](https://github.com/huydsai02/cv/assets/84078549/8e4e8de4-f7c3-4b6a-8b78-f74a2047f97c)
 
 ## Training resnet18, resnext101, mobilenetv3_smal, vit32
-1. python -m classifier.run --command 'train' --path_to_config classifier/config/*.yaml
+1. To start training, run:
+   ```
+   python -m classifier.run --command 'train' --path_to_config classifier/config/*.yaml
+   ```
 ## Training MAE VIT
 1. run
 
