@@ -11,11 +11,11 @@ To download detector and classifier checkpoint, click [here](https://drive.googl
 python api.py --detector_path path/to/detector/checkpoint --classifier_path path/to/classifier/checkpoint
 ```
 2. Open chrome browser extension and open developer mode. Click `Load unpacked` and select the directory you cloned  
-![image](https://github.com/huydsai02/cv/assets/84078549/21d0a4f5-0790-4581-ae49-81aee091c006)
+![image](https://drive.google.com/uc?export=view&id=1L-Fu2zoda0VffFbXr66_nugSXV5lK89d)
 3. Open a random youtube video and click the extension icon -> Movie Controller  
-![image](https://github.com/huydsai02/cv/assets/84078549/05237a69-6fc6-40ae-8e24-4264fee65ad0)
+![image](https://drive.google.com/uc?export=view&id=1ewYCjjo3tnpOmGhBHwjJa4tjMx19P_ca)
 4. Tick to checkbox and enjoy your video  
-![image](https://github.com/huydsai02/cv/assets/84078549/8e4e8de4-f7c3-4b6a-8b78-f74a2047f97c)
+![image](https://drive.google.com/uc?export=view&id=1qiTBhaV52ofvT49G7W1NwhKMZN_dRHCn)
 
 ## Training resnet18, resnext101, mobilenetv3_smal, vit32
 1. To start training, run:
