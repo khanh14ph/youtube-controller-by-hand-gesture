@@ -7,7 +7,8 @@ google-api-python-client
 uvicorn
 omegaconf
 opencv_python_headless
-torchvision
+torchvision==0.12.0
 torchmetrics
 future
 seaborn
+mediapipe
