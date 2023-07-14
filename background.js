@@ -8,6 +8,10 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason.search(/install/g) === -1) {
         return;
     }
+    chrome.tabs.create({
+        url: chrome.extension.getURL('welcome.html'),
+        active: true
+    });
 });
 
 function vidOff() {
@@ -107,23 +111,32 @@ function handleSubmit(imageSrc) {
         label = str;
         if (str == "stop") {
             playStopVid();
+            label = `${str} (stop/continue)`
         } else if (str == "ok") {
             // next
             next();
+            label = `${str} (Next Video)`
         } else if (str == "mute") {
             mute()
+            label = `${str} (Mute/Unmute)`
         } else if (str == "like") {
             volumeUpVid();
+            label = `${str} (volume up)`
         } else if (str == "dislike") {
             volumeDownVid();
+            label = `${str} (volume down)`
         } else if (str == "palm") {
             // resize
             sizeScreen();
+            label = `${str} (resize screen)`
         } else if (str == "two_up") {
             speedUp();
+            label = `${str} (speed up)`
         } else if (str == "peace") {
             speedDown();
-        } 
+            label = `${str} (speed down)`
+        }
+        sendMessage();
     })
 }
 
@@ -202,4 +215,4 @@ function sendMessage() {
     chrome.runtime.sendMessage({data: label});
 }
 
-setInterval(sendMessage, 100);
+// setInterval(sendMessage, 100);

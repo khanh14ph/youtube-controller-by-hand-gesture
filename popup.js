@@ -1,3 +1,7 @@
+const constraints = window.constraints = {
+    video: true
+  };
+
 const vid = document.querySelector('#webcamVideo');
 let intervalId = null;
 
@@ -48,9 +52,7 @@ function turnOnInferring() {
 }
 
 function setupCam() {
-    navigator.mediaDevices.getUserMedia({
-        video: true
-    }).then(mediaStream => {
+    navigator.mediaDevices.getUserMedia(constraints).then(mediaStream => {
         document.querySelector('#webcamVideo').srcObject = mediaStream;
         localstream = mediaStream;
     }).catch((error) => {
