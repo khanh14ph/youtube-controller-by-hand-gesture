@@ -21,12 +21,26 @@ from torchvision.transforms import functional as f
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
-from constants import targets
 from detector.model import TorchVisionModel
 from detector.ssd_mobilenetv3 import SSDMobilenet
 from classifier import utils
 
 current_folder = os.path.dirname(os.path.realpath(__file__))
+
+IMAGES = (".jpeg", ".jpg", ".jp2", ".png", ".tiff", ".jfif", ".bmp", ".webp", ".heic")
+
+targets = {
+    1: "dislike",
+    2: "like",
+    3: "mute",
+    4: "ok",
+    5: "palm",
+    6: "peace",
+    7: "stop",
+    8: "two up",
+    9: "no gesture",
+    
+}
 
 parser = argparse.ArgumentParser(description='Model Live')
 parser.add_argument("--detector_path", default="", type=str)
@@ -78,7 +92,7 @@ def preprocess(path):
         return img_tensor, (width, height), (padded_width, padded_height)
 
 
-conf_classifier = OmegaConf.load(os.path.join(current_folder, "config", "default.yaml"))
+conf_classifier = OmegaConf.load(os.path.join(current_folder, "classifier", "config", "default.yaml"))
 classifier_model=utils.build_model(
         model_name=conf_classifier.model.name,
         num_classes=len(targets),
@@ -89,10 +103,7 @@ classifier_model=utils.build_model(
         ff=conf_classifier.model.full_frame,
     )
 
-
-
 classifier_model.eval()
-
 
 app = FastAPI()
 
